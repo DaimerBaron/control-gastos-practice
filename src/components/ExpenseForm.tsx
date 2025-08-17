@@ -1,34 +1,61 @@
+import { useState } from 'react';
+import type { DraftExpense, Value} from "../types";
 import { categories } from "../data/categories"
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 function ExpenseForm() {
+    const [expense, setExpense] = useState<DraftExpense>({
+        name: '',
+        amount: 0,
+        category: '',
+        date: new Date()
+    });
+
+    const [error, setError] = useState<string | null>(null)
+
+    const handleChangeDate = (value: Value ) =>{
+        setExpense({...expense, date:value})
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const {name, value} = e.target;
+        const isAmountValid = ['amount'].includes(name)
+        setExpense({...expense, [name]: isAmountValid ? Number(value) : value })
+    }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        //validar si hay campos vacios
+        if (Object.values(expense).includes('')){
+            setError('Todos los campos son obligatorios');
+        }
+        
+    }
+
     return (
-        <form className="space-y-5" action="">
+        <form className="space-y-5" onSubmit={handleSubmit}>
+            {}
             <legend className="uppercase text-center text-2xl font-bold border-b-2 py-2 border-blue-500">Nuevo gasto</legend>
             <div className="flex flex-col gap-2">
                 <label className="font-bold" htmlFor="name" >Nombre gasto: </label>
-                <input id="name" placeholder="Añade el nombre del gasto" className=" border border-gray-400 rounded-lg bg-white outline-none w-full p-2" name="name" type="text" />
+                <input onChange={handleChange} id="name" value={expense.name} placeholder="Añade el nombre del gasto" className=" border border-gray-400 rounded-lg bg-white outline-none w-full p-2" name="name" type="text" />
             </div>
             <div className="flex flex-col gap-2">
                 <label className="font-bold" htmlFor="amount" >Cantidad: </label>
-                <input id="amount" placeholder="Añade la cantidad del gasto ej. 300" className=" border border-gray-400 rounded-lg bg-white outline-none w-full p-2" name="amount" type="number" />
+                <input onChange={handleChange} id="amount" value={expense.amount} placeholder="Añade la cantidad del gasto ej. 300" className=" border border-gray-400 rounded-lg bg-white outline-none w-full p-2" name="amount" type="number" />
             </div>
             <div className="flex flex-col gap-2">
                 <label className="font-bold" htmlFor="category" >Categoria: </label>
-                <select className="border border-gray-400 rounded-lg text-black bg-white outline-none w-full p-2" name="category" id="category">
+                <select onChange={handleChange} value={expense.category} className="border border-gray-400 rounded-lg text-black bg-white outline-none w-full p-2" name="category" id="category">
                     <option value="--Seleccione--">-- Seleccione--</option>
                     {categories.map((category) => (<option key={category.id} value={category.id}>{category.name}</option>))}
                 </select>
             </div>
             <div className="flex flex-col gap-2">
                 <label className="font-bold" htmlFor="date" >Fecha: </label>
-                <DatePicker id="date" className="border border-gray-400 rounded-lg bg-white outline-none w-full p-2" />
+                <DatePicker value={expense.date} onChange={handleChangeDate} id="date" className="border border-gray-400 rounded-lg bg-white outline-none w-full p-2" />
             </div>
 
             <input value="Añadir gasto" type="submit" className="bg-blue-600 p-2 w-full text-white font-bold uppercase rounded-lg " />
