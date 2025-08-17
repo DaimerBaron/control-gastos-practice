@@ -1,4 +1,4 @@
-import BudgeFrom from "./components/BudgeForm"
+import BudgetFrom from "./components/BudgetForm"
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
       <h1 className="uppercase text-white text-center text-xl font-black">Planificador de gastos</h1>
     </header>
     <div className=" max-w-3xl bg-white rounded-lg mx-auto mt-10 shadow-lg p-10">
-      <BudgeFrom/>
+      <BudgetFrom/>
     </div>
 
    </>
