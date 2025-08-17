@@ -4,6 +4,7 @@ import { categories } from "../data/categories"
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import ErrorMessage from './ErrorMessage';
 
 function ExpenseForm() {
     const [expense, setExpense] = useState<DraftExpense>({
@@ -30,13 +31,14 @@ function ExpenseForm() {
         //validar si hay campos vacios
         if (Object.values(expense).includes('')){
             setError('Todos los campos son obligatorios');
+            return;
         }
         
     }
 
     return (
         <form className="space-y-5" onSubmit={handleSubmit}>
-            {}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
             <legend className="uppercase text-center text-2xl font-bold border-b-2 py-2 border-blue-500">Nuevo gasto</legend>
             <div className="flex flex-col gap-2">
                 <label className="font-bold" htmlFor="name" >Nombre gasto: </label>
