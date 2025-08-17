@@ -5,11 +5,10 @@ export default function BudgetFrom() {
   const { dispatch } = useBudget();
  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isNaN(e.target.valueAsNumber)) return;
     setBudget(e.target.valueAsNumber)
   }
 
-  const isValid = useMemo(()=>{
+  const isValidBudget = useMemo(()=>{
     return isNaN(budget)||budget<=0
   },[budget])
 
@@ -41,7 +40,7 @@ export default function BudgetFrom() {
         <input
           type="submit"
           className=" disabled:opacity-20 disabled:bg-gray-500 disabled:cursor-not-allowed bg-blue-600 w-full cursor-pointer text-white p-2 hover:bg-blue-700"
-          disabled= {isValid}
+          disabled= {isValidBudget}
         />
       </form>
     </>
