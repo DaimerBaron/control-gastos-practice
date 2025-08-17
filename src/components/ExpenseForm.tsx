@@ -1,4 +1,11 @@
 import { categories } from "../data/categories"
+import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
+
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function ExpenseForm() {
     return (
@@ -18,6 +25,10 @@ function ExpenseForm() {
                     <option value="--Seleccione--">-- Seleccione--</option>
                     {categories.map((category) => (<option key={category.id} value={category.id}>{category.name}</option>))}
                 </select>
+            </div>
+            <div className="flex flex-col gap-2">
+                <label className="font-bold" htmlFor="date" >Fecha: </label>
+                <DatePicker id="date" className="border border-gray-400 rounded-lg bg-white outline-none w-full p-2" />
             </div>
 
             <input value="Añadir gasto" type="submit" className="bg-blue-600 p-2 w-full text-white font-bold uppercase rounded-lg " />
