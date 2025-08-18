@@ -1,4 +1,5 @@
-import { DraftExpense } from "../types"
+import { DraftExpense, Expense} from "../types"
+import { v4 as uuidv4 } from 'uuid';
 
 export type BudgetActions = 
 {type: 'add-budget', payload: {budget:number}}|
@@ -16,6 +17,12 @@ export const initialState: BudgetState = {
     expense:[]
 }
 
+const createExpense = (expense: DraftExpense): Expense =>{
+    return {
+        ...expense, id: uuidv4()
+    }
+}
+
 export const budgetReducer = (state: BudgetState = initialState, action: BudgetActions) =>{
    switch (action.type){
         case 'add-budget':
@@ -31,10 +38,10 @@ export const budgetReducer = (state: BudgetState = initialState, action: BudgetA
                 ...state, modal:false
             }
         case 'add-expense':
-            console.log(state);
+            const newExpense = createExpense(action.payload.expense);
             
             return {
-                ...state, expense:[...state.expense,action.payload.expense]
+                ...state, expense:[...state.expense, newExpense]
             }
         default:
             return state;

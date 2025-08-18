@@ -14,6 +14,7 @@ export const BudgetContext = createContext<BudgetContextType>(null!)
 
 export default function BudgetProvider({children}:BudgetProviderProps) {
     const [state, dispatch] = useReducer(budgetReducer, initialState)
+    console.log(state);
     
     return (
         <BudgetContext.Provider value={{ state, dispatch }}>

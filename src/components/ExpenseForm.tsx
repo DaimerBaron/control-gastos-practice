@@ -37,7 +37,12 @@ function ExpenseForm() {
         }
 
         dispatch({type:'add-expense', payload:{expense}})
-        
+        setExpense({
+            name: '',
+            amount: 0,
+            category: '',
+            date: new Date()
+        })
     }
 
     return (
