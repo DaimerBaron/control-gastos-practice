@@ -1,6 +1,7 @@
 import { Expense } from "../types"
 import AmountDisplay from "./AmountDisplay"
 import { categories } from "../data/categories"
+import { formatDate } from "../helpers"
 
 
 
@@ -17,7 +18,7 @@ function ExpenseDetails({expense}: ExpenseDetailsProps) {
         </div>
         <div className="flex-1 space-y-1">
             <p className="font-bold uppercase">{expense.name}</p>
-            <p>{expense.date?.toLocaleString()}</p>
+            <p>{formatDate(expense.date!.toString())}</p>
             <p className="">{category[0]?.name}</p>
         </div>
         <AmountDisplay amount={expense.amount} />
