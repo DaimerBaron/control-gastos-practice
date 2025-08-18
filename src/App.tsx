@@ -3,6 +3,7 @@ import BudgetFrom from "./components/BudgetForm"
 import useBudget from "./hooks/useBudget";
 import BudgetTracker from "./components/BudgetTracker";
 import ExpenseModal from "./components/ExpenseModal";
+import ExpenseList from "./components/ExpenseList";
 function App() {
 
   const { state } = useBudget();
@@ -10,16 +11,19 @@ function App() {
   const isValidBudget = useMemo(() => state.budget>0, [state.budget] )
 
   return (
-   <>
+   <div className="min-h-screen bg-slate-200">
     <header className="bg-blue-600 py-6 h-max-72" >
       <h1 className="uppercase text-white text-center text-xl font-black">Planificador de gastos</h1>
     </header>
     <div className=" max-w-3xl bg-white rounded-lg mx-auto mt-10 shadow-lg p-10">
       {isValidBudget ? <BudgetTracker /> : <BudgetFrom />}
     </div>
-    {isValidBudget && <main className="w-3xl"><ExpenseModal /></main>}
+    {isValidBudget && <main className="max-w-3xl mx-auto py-4">
+      <ExpenseModal />
+      <ExpenseList />
+    </main>}
 
-   </>
+   </div>
   )
 }
 

@@ -1,14 +1,15 @@
 import  {currencyFormat}  from '../helpers/index'
 
 type AmountDisplayProps = {
-    label: string;
+    label?: string;
     amount: number;
 }
 
 function AmountDisplay({label, amount}: AmountDisplayProps) {
   return (
     <p>
-        {label}: <span className="font-bold">{currencyFormat(amount)}</span>    
+        {label && `${label}: `}
+        <span className="font-bold">{currencyFormat(amount)}</span>    
     </p>
   )
 }
