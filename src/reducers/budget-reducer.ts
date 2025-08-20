@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 export type BudgetActions =
     { type: 'add-budget', payload: { budget: number } } |
     { type: 'show-modal' } | { type: 'close-modal' } |
-    { type: 'add-expense', payload: { expense: DraftExpense } }
+    { type: 'add-expense', payload: { expense: DraftExpense } }|
+    { type: 'delete-expense', payload: { id: string } } 
 
 export type BudgetState = {
     budget: number
@@ -38,10 +39,18 @@ export const budgetReducer = (state: BudgetState = initialState, action: BudgetA
                 ...state, modal: false
             }
         case 'add-expense':
-            const newExpense = createExpense(action.payload.expense);
+            {const newExpense = createExpense(action.payload.expense)
 
             return {
                 ...state, expense: [...state.expense, newExpense], modal: false
+            }}
+        case 'delete-expense':
+            {
+                const updateExpenses = state.expense.filter(expense =>  expense.id !== action.payload.id)
+
+                return {
+                ...state, expense: updateExpenses
+            }
             }
         default:
             return state;

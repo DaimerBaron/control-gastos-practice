@@ -15,7 +15,11 @@ import "react-swipeable-list/dist/styles.css";
 type ExpenseDetailsProps = {
   expense: Expense;
 };
+
+import  useBudget  from "../hooks/useBudget";
 function ExpenseDetails({ expense }: ExpenseDetailsProps) {
+
+    const { dispatch } = useBudget();
   const leadingActions = () => (
     <LeadingActions>
       <SwipeAction onClick={() => console.info("swipe action triggered")}>
@@ -24,11 +28,11 @@ function ExpenseDetails({ expense }: ExpenseDetailsProps) {
     </LeadingActions>
   );
 
-  const trailingActions = () => (
+  const trailingActions = (id: string) => (
     <TrailingActions>
       <SwipeAction
         destructive={true}
-        onClick={() => console.info("swipe action triggered")}
+        onClick={() => dispatch({type: 'delete-expense', payload: { id }})}
       >
         Delete
       </SwipeAction>
@@ -42,7 +46,7 @@ function ExpenseDetails({ expense }: ExpenseDetailsProps) {
     <SwipeableList>
       <SwipeableListItem
         leadingActions={leadingActions()}
-        trailingActions={trailingActions()}
+        trailingActions={trailingActions(expense.id)}
       >
         <div className="bg-white rounded-2xl shadow-lg p-4 w-full flex gap-4 mt-5 roudned-lg justify-between items-center ">
           <div>
