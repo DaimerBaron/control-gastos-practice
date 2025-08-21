@@ -78,6 +78,7 @@ function ExpenseForm() {
       category: "",
       date: new Date(),
     });
+    setPreviousAmount(0)
   };
 
   return (
