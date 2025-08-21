@@ -16,8 +16,8 @@ function ExpenseForm() {
   });
 
   const [error, setError] = useState<string | null>(null);
-  const { dispatch, state } = useBudget();
-
+  const [ prevousAmount, setPreviousAmount ] = useState(0);
+  const { dispatch, state, availableBudget } = useBudget();
 
   useEffect(() => {
     if (state.editingId) {
@@ -56,11 +56,19 @@ function ExpenseForm() {
       return;
     }
 
+    // validar que no me pase de presupuesto
+
+    if (prevousAmount - expense.amount > availableBudget) {
+      setError("El gasto excede el presupuesto disponible");
+      return;
+    }
+
     if (state.editingId) {
       dispatch({
         type: "update-expense",
         payload: { expense: { ...expense, id: state.editingId } },
       });
+        setPreviousAmount(expense.amount);
     } else {
       dispatch({ type: "add-expense", payload: { expense } });
     }
@@ -97,6 +105,7 @@ function ExpenseForm() {
           Cantidad:{" "}
         </label>
         <input
+          onFocus={() => setError(null)}
           onChange={handleChange}
           id="amount"
           value={expense.amount}
