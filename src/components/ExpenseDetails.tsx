@@ -22,8 +22,8 @@ function ExpenseDetails({ expense }: ExpenseDetailsProps) {
     const { dispatch } = useBudget();
   const leadingActions = () => (
     <LeadingActions>
-      <SwipeAction onClick={() => console.info("swipe action triggered")}>
-        Action name
+      <SwipeAction onClick={() => dispatch({type: 'edit-expense', payload: { id: expense.id }})}>
+        Actualizar
       </SwipeAction>
     </LeadingActions>
   );
