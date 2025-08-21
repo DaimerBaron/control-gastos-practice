@@ -48,7 +48,7 @@ function ExpenseDetails({ expense }: ExpenseDetailsProps) {
         leadingActions={leadingActions()}
         trailingActions={trailingActions(expense.id)}
       >
-        <div className="bg-white rounded-2xl shadow-lg p-4 w-full flex gap-4 mt-5 roudned-lg justify-between items-center ">
+        <div className="bg-white rounded-2xl shadow-lg p-4 w-full flex gap-4 mt-5 roudned-lg justify-between items-center select-none cursor-pointer ">
           <div>
             <img
               className="w-10 h-10"
@@ -58,7 +58,7 @@ function ExpenseDetails({ expense }: ExpenseDetailsProps) {
           </div>
           <div className="flex-1 space-y-1">
             <p className="font-bold uppercase">{expense.name}</p>
-            <p>{formatDate(expense.date!.toString())}</p>
+            <p className="text-slate-600 text-sm">{formatDate(expense.date!.toString())}</p>
             <p className="">{category[0]?.name}</p>
           </div>
           <AmountDisplay amount={expense.amount} />

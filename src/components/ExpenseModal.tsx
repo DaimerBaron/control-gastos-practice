@@ -11,9 +11,9 @@ export default function ExpenseModal() {
   };
   return (
     <>
-      <div className="fixed right-5 bottom-5 flex items-center justify-center">
+      <div className="fixed right-5 bottom-28 z-10 flex items-center justify-center">
         <button title="Agregar Gasto" onClick={handleShowModal} type="button">
-          <PlusCircleIcon className="w-16 h-16 text-blue-600 rounded-full cursor-pointer" />
+          <PlusCircleIcon className="w-16 h-16  text-blue-600 rounded-full cursor-pointer" />
         </button>
       </div>
 
