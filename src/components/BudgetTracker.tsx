@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 function BudgetTracker() {
-  const { state, availableBudget, totalExpense } = useBudget();
+  const { state, availableBudget, totalExpense, dispatch } = useBudget();
   const porcentage = ((totalExpense / state.budget) * 100);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 select-none">
@@ -24,6 +24,7 @@ function BudgetTracker() {
       </div>
       <div className="flex flex-col justify-between items-center">
         <button
+          onClick={()=>dispatch({type: 'reset'})}
           type="button"
           className="bg-pink-600 text-white p-2 rounded-lg cursor-pointer hover:bg-pink-700 uppercase"
         >
