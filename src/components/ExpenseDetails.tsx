@@ -52,13 +52,13 @@ function ExpenseDetails({ expense }: ExpenseDetailsProps) {
           <div>
             <img
               className="w-10 h-10"
-              src={`/public/icono_${category[0]?.icon}.svg`}
+              src={`/icono_${category[0]?.icon}.svg`}
               alt=""
             />
           </div>
-          <div className="flex-1 space-y-1">
+          <div className="flex-1 space-y-1 ">
             <p className="font-bold uppercase">{expense.name}</p>
-            <p className="text-slate-600 text-sm">{formatDate(expense.date!.toString())}</p>
+            <p className="text-slate-600 text-sm  truncate max-w-[120px] sm:max-w-full ">{formatDate(expense.date!.toString())}</p>
             <p className="">{category[0]?.name}</p>
           </div>
           <AmountDisplay amount={expense.amount} />

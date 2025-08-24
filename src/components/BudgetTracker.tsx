@@ -7,7 +7,7 @@ function BudgetTracker() {
   const { state, availableBudget, totalExpense, dispatch } = useBudget();
   const porcentage = ((totalExpense / state.budget) * 100);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 select-none">
+    <div className="grid grid-cols-1  md:grid-cols-2  select-none">
       <div className="flex justify-between items-center">
         <CircularProgressbar
           value={porcentage}
@@ -22,7 +22,7 @@ function BudgetTracker() {
           text={`${porcentage.toFixed(2)} %`}
         />
       </div>
-      <div className="flex flex-col justify-between items-center">
+      <div className="flex flex-col justify-between items-center gap-4 mt-4 ">
         <button
           onClick={()=>dispatch({type: 'reset'})}
           type="button"

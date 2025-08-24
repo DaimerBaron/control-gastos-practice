@@ -9,7 +9,7 @@ function FilterCategory(){
     }
     return(
         <>
-            <form>
+            <form className="px-3">
                 <div className="w-full shadow-sm p-4 bg-white rounded-xl flex gap-4 my-4">
                     <label htmlFor="filter-by-category">Categoría: </label>
                     <select onChange={handleChange}  className="w-full bg-sky-100 outline-none px-2" name="filter-by-category" id="filter-by-category">
