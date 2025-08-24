@@ -48,7 +48,7 @@ function ExpenseDetails({ expense }: ExpenseDetailsProps) {
         leadingActions={leadingActions()}
         trailingActions={trailingActions(expense.id)}
       >
-        <div className="bg-white rounded-xl shadow-lg p-4 w-full flex gap-4 mt-1  justify-between items-center select-none cursor-pointer ">
+        <div className="bg-white rounded-xl  p-4 w-full flex gap-4 mt-2  justify-between items-center select-none cursor-pointer ">
           <div>
             <img
               className="w-10 h-10"
